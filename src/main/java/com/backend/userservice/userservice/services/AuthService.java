@@ -26,9 +26,9 @@ import java.util.UUID;
 public class AuthService {
 
     private SessionRepository sessionRepository;
-
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
+    private JWTService jwtService;
 
     @SneakyThrows
     public ResponseEntity<UserDTO> login(String email, String password) {
@@ -45,7 +45,7 @@ public class AuthService {
             throw new InvalidPasswordException("Wrong password");
         }
 
-        String token = RandomStringUtils.randomAlphanumeric(30);
+        String token = jwtService.generateJWTToken(user);
 
         Session session = new Session();
         session.setUser(user);

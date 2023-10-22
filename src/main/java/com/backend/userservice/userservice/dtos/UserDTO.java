@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @Getter
 public class UserDTO {
-
     private String email;
     private Set<Role> roles;
 
